@@ -1,16 +1,14 @@
 #!/bin/sh
 set -e
 
-mkdir /data
-while [ ! -f /data/.env ]
-do
+mkdir -p /data
+if [ ! -f .env ]; then
 	cp /app/.env.example /data/.env
 	ln -s /data/.env .env
 	echo Please edit the the /data/.env file!
 	echo docker exec -it $(hostname) vim /data/.env
-	echo Press \[Enter\] key when you finished editing...
-	read _
-done
+	exit 1
+fi
 
 touch /data/database.sqlite
 php artisan migrate:refresh
