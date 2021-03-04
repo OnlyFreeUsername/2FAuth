@@ -10,3 +10,11 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/.git
+.dockerignore
+.editorconfig
+.gitattributes
+.github
+LICENSE
+README.md
+changelog.md
