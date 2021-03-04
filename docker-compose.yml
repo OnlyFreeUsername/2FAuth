@@ -19,6 +19,7 @@ services:
       DB_DATABASE: /app/db/database.sqlite
     volumes:
       - ${DATA_DIR}/db:/app/db
+      - ${DATA_DIR}/icons:/app/storage/app/public/icons
     networks:
       - 2fauth
 
