@@ -1,33 +1,33 @@
 version: '3.9'
 
 networks:
-  2fauth-internal:
+  2fauth:
 
 services:
   2fauth:
     image: chenio/2fauth
     build: .
     ports:
-      - 8080:8080
+      - 8010:80
     restart: unless-stopped
     environment:
       SITE_OWNER: mail@example.com
       APP_KEY: ${APP_KEY}
-      APP_PORT: 8080
+      APP_PORT: 80
       REDIS_HOST: 2fauth-redis
       DB_CONNECTION: sqlite
       DB_DATABASE: /app/db/database.sqlite
     volumes:
-      - './2fauth/db:/app/db'
+      - ${DATA_DIR}/db:/app/db
     networks:
-      - 2fauth-internal
+      - 2fauth
 
   2fauth-redis:
     image: redis:6.0-alpine
     restart: unless-stopped
     networks:
-      - 2fauth-internal
+      - 2fauth
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
     volumes:
-      - ./2fauth/redis:/data
+      - ${DATA_DIR}/redis:/data
